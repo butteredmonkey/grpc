@@ -24,6 +24,12 @@
 
 cmake_minimum_required(VERSION 3.5.1)
 
+include(cmake/HunterGate.cmake)
+HunterGate(
+    URL "https://github.com/cpp-pm/hunter/archive/v0.23.321.tar.gz"
+    SHA1 "5e53cbb0429037ea8e2592bfd92704b8ff3ab492"
+)
+
 set(PACKAGE_NAME          "grpc")
 set(PACKAGE_VERSION       "1.48.0")
 set(gRPC_CORE_VERSION     "26.0.0")
@@ -37,11 +43,11 @@ set(PACKAGE_TARNAME       "${PACKAGE_NAME}-${PACKAGE_VERSION}")
 set(PACKAGE_BUGREPORT     "https://github.com/grpc/grpc/issues/")
 project(${PACKAGE_NAME} LANGUAGES C CXX)
 
-set(gRPC_INSTALL_BINDIR "bin" CACHE STRING "Installation directory for executables")
-set(gRPC_INSTALL_LIBDIR "lib" CACHE STRING "Installation directory for libraries")
-set(gRPC_INSTALL_INCLUDEDIR "include" CACHE STRING "Installation directory for headers")
-set(gRPC_INSTALL_CMAKEDIR "lib/cmake/${PACKAGE_NAME}" CACHE STRING "Installation directory for cmake config files")
-set(gRPC_INSTALL_SHAREDIR "share/grpc" CACHE STRING "Installation directory for root certificates")
+set(gRPC_INSTALL_BINDIR "bin" CACHE PATH "Installation directory for executables")
+set(gRPC_INSTALL_LIBDIR "lib" CACHE PATH "Installation directory for libraries")
+set(gRPC_INSTALL_INCLUDEDIR "include" CACHE PATH "Installation directory for headers")
+set(gRPC_INSTALL_CMAKEDIR "lib/cmake/${PACKAGE_NAME}" CACHE PATH "Installation directory for cmake config files")
+set(gRPC_INSTALL_SHAREDIR "share/grpc" CACHE PATH "Installation directory for root certificates")
 set(gRPC_BUILD_MSVC_MP_COUNT 0 CACHE STRING "The maximum number of processes for MSVC /MP option")
 
 # Options
@@ -70,10 +76,10 @@ endif()
 # "module": build the dependency using sources from git submodule (under third_party)
 # "package": use cmake's find_package functionality to locate a pre-installed dependency
 
-set(gRPC_ZLIB_PROVIDER "module" CACHE STRING "Provider of zlib library")
+set(gRPC_ZLIB_PROVIDER "package" CACHE STRING "Provider of zlib library")
 set_property(CACHE gRPC_ZLIB_PROVIDER PROPERTY STRINGS "module" "package")
 
-set(gRPC_CARES_PROVIDER "module" CACHE STRING "Provider of c-ares library")
+set(gRPC_CARES_PROVIDER "package" CACHE STRING "Provider of c-ares library")
 set_property(CACHE gRPC_CARES_PROVIDER PROPERTY STRINGS "module" "package")
 
 set(gRPC_RE2_PROVIDER "module" CACHE STRING "Provider of re2 library")
@@ -82,10 +88,10 @@ set_property(CACHE gRPC_RE2_PROVIDER PROPERTY STRINGS "module" "package")
 set(gRPC_SSL_PROVIDER "module" CACHE STRING "Provider of ssl library")
 set_property(CACHE gRPC_SSL_PROVIDER PROPERTY STRINGS "module" "package")
 
-set(gRPC_PROTOBUF_PROVIDER "module" CACHE STRING "Provider of protobuf library")
+set(gRPC_PROTOBUF_PROVIDER "package" CACHE STRING "Provider of protobuf library")
 set_property(CACHE gRPC_PROTOBUF_PROVIDER PROPERTY STRINGS "module" "package")
 
-set(gRPC_PROTOBUF_PACKAGE_TYPE "" CACHE STRING "Algorithm for searching protobuf package")
+set(gRPC_PROTOBUF_PACKAGE_TYPE "CONFIG" CACHE STRING "Algorithm for searching protobuf package")
 set_property(CACHE gRPC_PROTOBUF_PACKAGE_TYPE PROPERTY STRINGS "CONFIG" "MODULE")
 
 if(gRPC_BUILD_TESTS)

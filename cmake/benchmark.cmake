@@ -27,6 +27,7 @@ if(gRPC_BENCHMARK_PROVIDER STREQUAL "module")
   endif()
 elseif(gRPC_BENCHMARK_PROVIDER STREQUAL "package")
   # Use "CONFIG" as there is no built-in cmake module for benchmark.
+  hunter_add_package(benchmark)
   find_package(benchmark REQUIRED CONFIG)
   if(TARGET benchmark::benchmark)
     set(_gRPC_BENCHMARK_LIBRARIES benchmark::benchmark)

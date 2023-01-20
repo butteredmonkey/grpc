@@ -55,6 +55,7 @@ if(gRPC_PROTOBUF_PROVIDER STREQUAL "module")
     set(gRPC_INSTALL FALSE)
   endif()
 elseif(gRPC_PROTOBUF_PROVIDER STREQUAL "package")
+  hunter_add_package(Protobuf)
   find_package(Protobuf REQUIRED ${gRPC_PROTOBUF_PACKAGE_TYPE})
 
   # {Protobuf,PROTOBUF}_FOUND is defined based on find_package type ("MODULE" vs "CONFIG").

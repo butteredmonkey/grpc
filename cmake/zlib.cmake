@@ -49,10 +49,11 @@ elseif(gRPC_ZLIB_PROVIDER STREQUAL "package")
   # package ("MODULE"), while on Windows the user is likely to have installed
   # zlib using cmake ("CONFIG").
   # See https://cmake.org/cmake/help/v3.6/module/FindZLIB.html
-  find_package(ZLIB REQUIRED)
+  hunter_add_package(ZLIB)
+  find_package(ZLIB CONFIG REQUIRED)
 
-  if(TARGET ZLIB::ZLIB)
-    set(_gRPC_ZLIB_LIBRARIES ZLIB::ZLIB)
+  if(TARGET ZLIB::zlib)
+    set(_gRPC_ZLIB_LIBRARIES ZLIB::zlib)
   else()
     set(_gRPC_ZLIB_LIBRARIES ${ZLIB_LIBRARIES})
   endif()
